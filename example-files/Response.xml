@@ -8,4 +8,3 @@ xsi:schemaLocation="http://vamsi.com/courses course-details.xsd">
 		<description>Learn Basics of Spring Framework</description>
 	</CourseDetails>
 </GetCourseDetailsResponse>
-<!-- Res -->
