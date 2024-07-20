@@ -1,1 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<GetCourseDetailsResponse xmlns="http://vamsi.com/courses"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://vamsi.com/courses course-details.xsd">
+	<CourseDetails>
+		<id>123</id>
+		<name>Spring</name>
+		<description>Learn Basics of Spring Framework</description>
+	</CourseDetails>
+</GetCourseDetailsResponse>
+<!-- Res -->
