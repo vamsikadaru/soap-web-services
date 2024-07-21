@@ -15,6 +15,7 @@ import com.vamsi.courses.GetAllCourseDetailsResponse;
 import com.vamsi.courses.GetCourseDetailsRequest;
 import com.vamsi.courses.GetCourseDetailsResponse;
 import com.vamsi.soap.webservices.soap_course_management.soap.bean.Course;
+import com.vamsi.soap.webservices.soap_course_management.soap.exception.CourseNotFoundException;
 import com.vamsi.soap.webservices.soap_course_management.soap.service.CourseDetailsService;
 import com.vamsi.soap.webservices.soap_course_management.soap.service.CourseDetailsService.Status;
 
@@ -36,6 +37,9 @@ public class CourseDetailsEndpoint {
 		
 		Course course = service.findById(request.getId());
 		
+		if(course==null) {
+			throw new CourseNotFoundException("Invalid Course Id " + request.getId());
+		}
 		return mapCourseDetails(course);
 	}
 
