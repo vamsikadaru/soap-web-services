@@ -8,12 +8,16 @@ import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
 import com.vamsi.courses.CourseDetails;
+import com.vamsi.courses.DeleteCourseDetailsRequest;
+import com.vamsi.courses.DeleteCourseDetailsResponse;
 import com.vamsi.courses.GetAllCourseDetailsRequest;
 import com.vamsi.courses.GetAllCourseDetailsResponse;
 import com.vamsi.courses.GetCourseDetailsRequest;
 import com.vamsi.courses.GetCourseDetailsResponse;
 import com.vamsi.soap.webservices.soap_course_management.soap.bean.Course;
 import com.vamsi.soap.webservices.soap_course_management.soap.service.CourseDetailsService;
+import com.vamsi.soap.webservices.soap_course_management.soap.service.CourseDetailsService.Status;
+
 
 @Endpoint
 public class CourseDetailsEndpoint {
@@ -72,5 +76,24 @@ public class CourseDetailsEndpoint {
 		List<Course> courses = service.findAll();
 		
 		return mapAllCourseDetails(courses);
+	}
+	@PayloadRoot(namespace="http://vamsi.com/courses", 
+			localPart="DeleteCourseDetailsRequest")
+	@ResponsePayload
+	public DeleteCourseDetailsResponse deleteCourseDetailsRequest
+		(@RequestPayload DeleteCourseDetailsRequest request) {
+		
+		Status status = service.deleteById(request.getId());
+		
+		DeleteCourseDetailsResponse response = new DeleteCourseDetailsResponse();
+		response.setStatus(mapStatus(status));
+		return response;
+	}
+
+	private com.vamsi.courses.Status mapStatus(Status status) {
+		// TODO Auto-generated method stub
+		if(status==Status.FAILURE)
+			return com.vamsi.courses.Status.FAILURE;
+		return com.vamsi.courses.Status.SUCCESS;
 	}
 }
